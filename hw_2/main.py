@@ -1,4 +1,5 @@
 from advpy_ast_tree import main as ast
+import sys
 
 
 def init_document():
@@ -35,7 +36,7 @@ def generate_image(img):
                  r'\end{figure}'))
 
 
-def main():
+def main(file_path):
     ast.main()
     content = _gen((init_document(),
                     generate_image_headers(),
@@ -43,9 +44,12 @@ def main():
                         generate_table([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
                         generate_image('AST.png')
                     ))))
-    with open('artifacts/table.tex', 'w') as fp:
+    with open(file_path, 'w') as fp:
         fp.write(content)
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) < 2:
+        main('artifacts/table.tex')
+    else:
+        main(sys.argv[1])
