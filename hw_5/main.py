@@ -5,7 +5,7 @@ import sys
 
 
 async def download_photo(session, folder, i):
-    async with session.get('https://thiscatdoesnotexist.com') as response:
+    async with session.get('https://picsum.photos/400') as response:
         if response.status == 200:
             file_name = f'{folder}/{i}.png'
             f = await aiofiles.open(file_name, mode='wb')
